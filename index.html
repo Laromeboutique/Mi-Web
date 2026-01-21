@@ -17,6 +17,10 @@
 
 *{ box-sizing:border-box; }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     margin:0;
     font-family:'Segoe UI', Arial, sans-serif;
@@ -58,6 +62,65 @@ header p{
     transform:translateY(-3px);
 }
 
+/* NAV STICKY */
+.sticky-nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    padding:12px 20px;
+    background:#fff;
+    border-bottom:1px solid var(--gray);
+}
+
+/* TITULOS STICKY */
+.nav-title{
+    text-align:center;
+    padding:14px 0;
+    border-radius:14px;
+    color:#fff;
+    font-weight:600;
+    text-decoration:none;
+    letter-spacing:.4px;
+    position:relative;
+    overflow:hidden;
+}
+
+/* Fondo imagen */
+.nav-title::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-size:110%;
+    background-position:center;
+    transition:.6s ease;
+    z-index:-2;
+}
+
+/* Overlay */
+.nav-title::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    z-index:-1;
+}
+
+/* Hover */
+.nav-title:hover::after{
+    transform:scale(1.08);
+}
+
+/* Fondos */
+.nav-title.diseñador::after{
+    background-image:url("assets/fondodiseñador.jpg");
+}
+.nav-title.arabe::after{
+    background-image:url("assets/fondoarabe.jpg");
+}
+
 /* COLUMNAS */
 .columns{
     display:grid;
@@ -75,19 +138,23 @@ header p{
     animation:fadeUp .8s ease;
 }
 
-/* TITULOS */
+/* Ajuste ancla scroll */
+#perfumes-disenador,
+#perfumes-arabes{
+    scroll-margin-top:140px;
+}
+
+/* TITULOS INTERNOS */
 .section-title{
-    font-size:20px;
+    font-size:22px;
     text-align:center;
-    padding-bottom:12px;
-    margin-bottom:20px;
-    border-bottom:2px solid var(--gold);
-    letter-spacing:.5px;
+    margin-bottom:22px;
+    font-weight:600;
 }
 
 /* SUBSECCIONES */
 .subsection h3{
-    margin:30px 0 16px;
+    margin:28px 0 16px;
     font-weight:500;
 }
 
@@ -116,7 +183,6 @@ header p{
 /* IMAGEN PERFUME */
 .product img{
     height:120px;
-    width:auto;
     object-fit:contain;
     cursor:pointer;
     transition:.35s ease;
@@ -139,7 +205,6 @@ header p{
 .price{
     font-weight:600;
     color:var(--gold);
-    font-size:15px;
 }
 
 /* BOTON */
@@ -147,12 +212,11 @@ header p{
     display:inline-block;
     margin-top:14px;
     padding:10px 22px;
-    background:transparent;
-    color:var(--black);
     border:1px solid var(--black);
     border-radius:30px;
     font-size:13px;
     text-decoration:none;
+    color:var(--black);
     transition:.3s;
 }
 .btn:hover{
@@ -181,15 +245,22 @@ header p{
 
 .modal img{
     max-height:400px;
-    width:auto;
     border-radius:18px;
     box-shadow:0 30px 60px rgba(0,0,0,.6);
-    animation:zoom .3s ease;
 }
 
-@keyframes zoom{
-    from{transform:scale(.85); opacity:0;}
-    to{transform:scale(1); opacity:1;}
+/* BOTON CERRAR */
+.close-btn{
+    position:absolute;
+    top:25px;
+    right:30px;
+    font-size:34px;
+    color:#fff;
+    cursor:pointer;
+    transition:.3s;
+}
+.close-btn:hover{
+    color:var(--gold);
 }
 
 /* FOOTER */
@@ -202,7 +273,6 @@ footer{
     border-top:1px solid var(--gray);
 }
 
-/* ANIMACION */
 @keyframes fadeUp{
     from{opacity:0; transform:translateY(25px);}
     to{opacity:1; transform:translateY(0);}
@@ -221,41 +291,119 @@ footer{
 <body>
 
 <header>
-    <img src="assets/logo.png" alt="L’Arôme Boutique" class="logo">
+    <img src="assets/logo.png" class="logo">
     <p>Perfumes de calidad, elegantes y originales</p>
     <p>Tarapoto · Envíos a todo el país · Asesoramiento gratis</p>
 
     <div class="social">
-        <a href="https://wa.me/51999999999"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
         <a href="#"><i class="fab fa-instagram"></i></a>
         <a href="#"><i class="fab fa-facebook"></i></a>
     </div>
 </header>
 
+<!-- NAV STICKY -->
+<nav class="sticky-nav">
+    <a href="#perfumes-disenador" class="nav-title diseñador">Perfumes Diseñador</a>
+    <a href="#perfumes-arabes" class="nav-title arabe">Perfumes Árabes</a>
+</nav>
+
 <div class="columns">
 
-    <!-- PERFUMES ARABES -->
-    <div class="section-box">
-        <div class="section-title">Perfumes Árabes </div>
+    <!-- PERFUMES DISEÑADOR -->
+    <div class="section-box" id="perfumes-disenador">
+        <div class="section-title">Perfumes Diseñador</div>
 
+        <!-- DAMAS -->
+        <div class="subsection">
+            <h3>👩 Damas</h3>
+            <div class="products">
+                <div class="product">
+                    <img src="assets/perfume.png" alt="Elegance">
+                    <h4>Elegance</h4>
+                    <p>Chanel</p>
+                    <p class="price">S/. 499.00</p>
+                    <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Elegance">Comprar</a>
+                </div>
+                <div class="product">
+                    <img src="assets/perfume.png" alt="Dior Bloom">
+                    <h4>Dior Bloom</h4>
+                    <p>Dior</p>
+                    <p class="price">S/. 429.00</p>
+                    <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Dior%20Bloom">Comprar</a>
+                </div>
+                <div class="product">
+                    <img src="assets/perfume.png" alt="Miss Lovely">
+                    <h4>Miss Lovely</h4>
+                    <p>Gucci</p>
+                    <p class="price">S/. 389.00</p>
+                    <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Miss%20Lovely">Comprar</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- CABALLEROS -->
         <div class="subsection">
             <h3>👨 Caballeros</h3>
             <div class="products">
                 <div class="product">
-                    <img src="assets/perfume2.png" alt="Explorer">
+                    <img src="assets/perfume.png" alt="Explorer">
                     <h4>Explorer</h4>
                     <p>Montblanc</p>
                     <p class="price">S/. 349.00</p>
                     <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Explorer">Comprar</a>
                 </div>
+                <div class="product">
+                    <img src="assets/perfume.png" alt="Black Oud">
+                    <h4>Black Oud</h4>
+                    <p>YSL</p>
+                    <p class="price">S/. 399.00</p>
+                    <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Black%20Oud">Comprar</a>
+                </div>
+                <div class="product">
+                    <img src="assets/perfume.png" alt="Pure XS">
+                    <h4>Pure XS</h4>
+                    <p>Paco Rabanne</p>
+                    <p class="price">S/. 369.00</p>
+                    <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Pure%20XS">Comprar</a>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- PERFUMES DISEÑADOR -->
-    <div class="section-box">
-        <div class="section-title">Perfumes Diseñador</div>
+    <!-- PERFUMES ÁRABES -->
+    <div class="section-box" id="perfumes-arabes">
+        <div class="section-title">Perfumes Árabes</div>
 
+        <!-- DAMAS -->
+        <div class="subsection">
+            <h3>👩 Damas</h3>
+            <div class="products">
+                <div class="product">
+                    <img src="assets/perfume.png" alt="Noor">
+                    <h4>Noor</h4>
+                    <p>Lattafa</p>
+                    <p class="price">S/. 219.00</p>
+                    <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Noor">Comprar</a>
+                </div>
+                <div class="product">
+                    <img src="assets/perfume.png" alt="Amira">
+                    <h4>Amira</h4>
+                    <p>Rasasi</p>
+                    <p class="price">S/. 239.00</p>
+                    <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Amira">Comprar</a>
+                </div>
+                <div class="product">
+                    <img src="assets/perfume.png" alt="Layla">
+                    <h4>Layla</h4>
+                    <p>Ajmal</p>
+                    <p class="price">S/. 259.00</p>
+                    <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Layla">Comprar</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- CABALLEROS -->
         <div class="subsection">
             <h3>👨 Caballeros</h3>
             <div class="products">
@@ -266,6 +414,20 @@ footer{
                     <p class="price">S/. 199.00</p>
                     <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Asad">Comprar</a>
                 </div>
+                <div class="product">
+                    <img src="assets/perfume.png" alt="Oud Royal">
+                    <h4>Oud Royal</h4>
+                    <p>Rasasi</p>
+                    <p class="price">S/. 249.00</p>
+                    <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Oud%20Royal">Comprar</a>
+                </div>
+                <div class="product">
+                    <img src="assets/perfume.png" alt="Desert King">
+                    <h4>Desert King</h4>
+                    <p>Ajmal</p>
+                    <p class="price">S/. 279.00</p>
+                    <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Desert%20King">Comprar</a>
+                </div>
             </div>
         </div>
     </div>
@@ -273,29 +435,28 @@ footer{
 </div>
 
 <footer>
-    © 2026 L’Arôme Boutique · Tarapoto – Perú  
-    <br>Ventas exclusivamente por WhatsApp
+    © 2026 L’Arôme Boutique · Ventas por WhatsApp
 </footer>
 
 <!-- MODAL -->
 <div class="modal" id="imageModal">
-    <img id="modalImg" src="">
+    <span class="close-btn">&times;</span>
+    <img id="modalImg">
 </div>
 
 <script>
 const modal = document.getElementById("imageModal");
 const modalImg = document.getElementById("modalImg");
+const closeBtn = document.querySelector(".close-btn");
 
 document.querySelectorAll(".product img").forEach(img=>{
-    img.addEventListener("click", ()=>{
-        modalImg.src = img.src;
+    img.onclick=()=>{
+        modalImg.src=img.src;
         modal.classList.add("active");
-    });
+    }
 });
-
-modal.addEventListener("click", ()=>{
-    modal.classList.remove("active");
-});
+closeBtn.onclick=()=>modal.classList.remove("active");
+modal.onclick=e=>{ if(e.target===modal) modal.classList.remove("active"); }
 </script>
 
 </body>
