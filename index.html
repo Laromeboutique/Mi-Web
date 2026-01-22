@@ -1,463 +1,243 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>L’Arôme Boutique</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L’Arôme Boutique</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
 
-<style>
-:root{
-    --white:#FAFAFA;
-    --black:#111111;
-    --gray:#E5E5E5;
-    --gold:#C9A24D;
-}
-
-*{ box-sizing:border-box; }
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    margin:0;
-    font-family:'Segoe UI', Arial, sans-serif;
-    background:var(--white);
-    color:var(--black);
-}
-
-/* HEADER */
-header{
-    background:#fff;
-    padding:40px 20px;
-    text-align:center;
-    border-bottom:1px solid var(--gray);
-}
-
-.logo{
-    max-width:180px;
-    margin-bottom:18px;
-}
-
-header p{
-    margin:6px 0;
-    font-size:14px;
-    color:#555;
-}
-
-/* REDES */
-.social{
-    margin-top:16px;
-}
-.social a{
-    color:var(--black);
-    margin:0 12px;
-    font-size:22px;
-    transition:.3s;
-}
-.social a:hover{
-    color:var(--gold);
-    transform:translateY(-3px);
-}
-
-/* NAV STICKY */
-.sticky-nav{
-    position:sticky;
-    top:0;
-    z-index:100;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-    padding:12px 20px;
-    background:#fff;
-    border-bottom:1px solid var(--gray);
-}
-
-/* TITULOS STICKY */
-.nav-title{
-    text-align:center;
-    padding:14px 0;
-    border-radius:14px;
-    color:#fff;
-    font-weight:600;
-    text-decoration:none;
-    letter-spacing:.4px;
-    position:relative;
-    overflow:hidden;
-}
-
-/* Fondo imagen */
-.nav-title::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background-size:110%;
-    background-position:center;
-    transition:.6s ease;
-    z-index:-2;
-}
-
-/* Overlay */
-.nav-title::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,.45);
-    z-index:-1;
-}
-
-/* Hover */
-.nav-title:hover::after{
-    transform:scale(1.08);
-}
-
-/* Fondos */
-.nav-title.diseñador::after{
-    background-image:url("assets/fondodiseñador.jpg");
-}
-.nav-title.arabe::after{
-    background-image:url("assets/fondoarabe.jpg");
-}
-
-/* COLUMNAS */
-.columns{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:40px;
-    padding:50px;
-}
-
-/* SECCIONES */
-.section-box{
-    background:#fff;
-    border-radius:18px;
-    padding:28px;
-    box-shadow:0 10px 30px rgba(0,0,0,.06);
-    animation:fadeUp .8s ease;
-}
-
-/* Ajuste ancla scroll */
-#perfumes-disenador,
-#perfumes-arabes{
-    scroll-margin-top:140px;
-}
-
-/* TITULOS INTERNOS */
-.section-title{
-    font-size:22px;
-    text-align:center;
-    margin-bottom:22px;
-    font-weight:600;
-}
-
-/* SUBSECCIONES */
-.subsection h3{
-    margin:28px 0 16px;
-    font-weight:500;
-}
-
-/* PRODUCTOS */
-.products{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:24px;
-}
-
-.product{
-    background:#fff;
-    border:1px solid var(--gray);
-    border-radius:16px;
-    padding:22px;
-    text-align:center;
-    transition:.35s ease;
-}
-
-.product:hover{
-    transform:translateY(-6px);
-    box-shadow:0 14px 30px rgba(0,0,0,.12);
-    border-color:var(--gold);
-}
-
-/* IMAGEN PERFUME */
-.product img{
-    height:120px;
-    object-fit:contain;
-    cursor:pointer;
-    transition:.35s ease;
-}
-
-.product:hover img{
-    transform:scale(1.12);
-}
-
-/* TEXTO */
-.product h4{
-    margin:14px 0 4px;
-    font-size:16px;
-}
-.product p{
-    margin:4px 0;
-    font-size:14px;
-    color:#666;
-}
-.price{
-    font-weight:600;
-    color:var(--gold);
-}
-
-/* BOTON */
-.btn{
-    display:inline-block;
-    margin-top:14px;
-    padding:10px 22px;
-    border:1px solid var(--black);
-    border-radius:30px;
-    font-size:13px;
-    text-decoration:none;
-    color:var(--black);
-    transition:.3s;
-}
-.btn:hover{
-    background:var(--black);
-    color:#fff;
-}
-
-/* MODAL */
-.modal{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.85);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    opacity:0;
-    visibility:hidden;
-    transition:.3s;
-    z-index:999;
-}
-
-.modal.active{
-    opacity:1;
-    visibility:visible;
-}
-
-.modal img{
-    max-height:400px;
-    border-radius:18px;
-    box-shadow:0 30px 60px rgba(0,0,0,.6);
-}
-
-/* BOTON CERRAR */
-.close-btn{
-    position:absolute;
-    top:25px;
-    right:30px;
-    font-size:34px;
-    color:#fff;
-    cursor:pointer;
-    transition:.3s;
-}
-.close-btn:hover{
-    color:var(--gold);
-}
-
-/* FOOTER */
-footer{
-    background:#fff;
-    color:#777;
-    text-align:center;
-    padding:22px;
-    font-size:14px;
-    border-top:1px solid var(--gray);
-}
-
-@keyframes fadeUp{
-    from{opacity:0; transform:translateY(25px);}
-    to{opacity:1; transform:translateY(0);}
-}
-
-/* RESPONSIVE */
-@media(max-width:900px){
-    .columns{
-        grid-template-columns:1fr;
-        padding:30px;
-    }
-}
-</style>
 </head>
 
 <body>
 
-<header>
-    <img src="assets/logo.png" class="logo">
-    <p>Perfumes de calidad, elegantes y originales</p>
-    <p>Tarapoto · Envíos a todo el país · Asesoramiento gratis</p>
+    <header>
+        <img src="assets/logo.png" class="logo">
+        <p>Perfumes de calidad, elegantes y originales</p>
+        <p>Tarapoto · Envíos a todo el país · Asesoramiento gratis</p>
 
-    <div class="social">
-        <a href="#"><i class="fab fa-whatsapp"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-facebook"></i></a>
+        <div class="social">
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+        </div>
+    </header>
+
+    <!-- NAV STICKY -->
+    <nav class="sticky-nav">
+        <a href="#perfumes-arabes" class="nav-title arabe">Perfumes Árabes</a>
+        <a href="#perfumes-disenador" class="nav-title diseñador">Perfumes Diseñador</a>
+
+    </nav>
+
+    <div class="columns">
+
+
+        <!-- PERFUMES ÁRABES -->
+        <div class="section-box" id="perfumes-arabes">
+            <div class="section-title">Perfumes Árabes</div>
+
+            <!-- DAMAS -->
+            <div class="subsection">
+                <h3>👩 Damas</h3>
+                <div class="products">
+                    <div class="product">
+                        <img src="assets/1.yara.png" alt="Noor">
+                        <h4>YARA TOUS DE LATAFFA</h4>
+                        <p>Lattafa</p>
+                        <!-- Acordes principales -->
+                        <div class="notes">
+                            <span class="note">Tropical |</span>
+                            <span class="note">Dulce |</span>
+                            <span class="note">Avainillado </span>
+                        </div>
+
+                        <!-- Tamaño -->
+                        <p class="size">EDP 100ML</p>
+
+                        <!-- Precio y botón -->
+                        <p class="price">S/. 190.00</p>
+                        <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Elegance">Comprar</a>
+                    </div>
+                    <div class="product">
+                        <img src="assets/9.ECLAIRE.png" alt="Amira">
+                        <h4>ECLAIRE DE LATAFFA</h4>
+                        <p>Rasasi</p>
+                        <!-- Acordes principales -->
+                        <div class="notes">
+                            <span class="note">Dulce |</span>
+                            <span class="note">Avainillado |</span>
+                            <span class="note">Caramelo </span>
+                        </div>
+
+                        <!-- Tamaño -->
+                        <p class="size">EDP 100ML</p>
+
+                        <!-- Precio y botón -->
+                        <p class="price">S/. 220.00</p>
+                        <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Elegance">Comprar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CABALLEROS -->
+            <div class="subsection">
+                <h3>👨 Caballeros</h3>
+                <div class="products">
+
+                    <!-- 
+                Producto normal 
+                    <div class="product">
+                        <img src="assets/perfume.png" alt="Oud Royal">
+                        <h4>Oud Royal</h4>
+                        <p>Rasasi</p>
+                        <p class="price">S/. 249.00</p>
+                        <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Oud%20Royal">Comprar</a>
+                    </div>            
+        
+        -->
+
+                    <!-- Producto agotado -->
+                    <div class="product sold-out">
+                        <span class="sold-badge">Agotado</span>
+                        <img src="assets/9pm.png" alt="Asad">
+                        <h4>9pm</h4>
+                        <p>Afnan</p>
+                        <p class="price">S/. 168.00</p>
+                        <a class="btn disabled" href="#">Comprar</a>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- PERFUMES DISEÑADOR -->
+        <div class="section-box" id="perfumes-disenador">
+            <div class="section-title">Perfumes Diseñador</div>
+
+            <!-- DAMAS -->
+            <div class="subsection">
+                <h3>👩 Damas</h3>
+                <div class="products">
+                    <div class="product">
+                        <img src="assets/2.GOODGIRLVELVET.png" alt="Elegance">
+                        <h4>GOOD GIRL VELVET FATALE</h4>
+                        <p>Carolina Herrera</p>
+                        <!-- Acordes principales -->
+                        <div class="notes">
+                            <span class="note">Dulce |</span>
+                            <span class="note">cálido especiado |</span>
+                            <span class="note">avainillado </span>
+                        </div>
+
+                        <!-- Tamaño -->
+                        <p class="size">EDP 80ML</p>
+
+                        <!-- Precio y botón -->
+                        <p class="price">S/. 280.00</p>
+                        <a class="btn"
+                            href="https://wa.me/51999999999?text=Hola,%20quiero el perfume%20Good girl velvet fatale">Comprar</a>
+                    </div>
+                    <div class="product">
+                        <img src="assets/3.COACH WILD ROSE.png" alt="Elegance">
+                        <h4>COACH WILD ROSE</h4>
+                        <p>Coach</p>
+                        <!-- Acordes principales -->
+                        <div class="notes">
+                            <span class="note">afrutados |</span>
+                            <span class="note">rosas |</span>
+                            <span class="note">ámbar </span>
+                        </div>
+
+                        <!-- Tamaño -->
+                        <p class="size">EDP 90ML</p>
+
+                          <!-- Precio y botón -->
+                        <div class="price-container">
+                            <span class="price-current">S/. 230.00</span>
+                            <span class="price-old">S/. 260.00</span>
+                        </div>
+                        <a class="btn"
+                            href="https://wa.me/51999999999?text=Hola,%20quiero el perfume%20Good girl velvet fatale">Comprar</a>
+                    </div>
+                    <div class="product">
+                        <img src="assets/4.VERSACEYELLOWDIAMOND.png" alt="Elegance">
+                        <h4>VERSACE YELLOW DIAMOND</h4>
+                        <p>VERSACE</p>
+                        <!-- Acordes principales -->
+                        <div class="notes">
+                            <span class="note">cítrico |</span>
+                            <span class="note">florales |</span>
+                            <span class="note">Floral amarillo </span>
+                        </div>
+
+                        <!-- Tamaño -->
+                        <p class="size">EDT 90ML</p>
+
+                          <!-- Precio y botón -->
+                        <div class="price-container">
+                            <span class="price-current">S/. 230.00</span>
+                            <span class="price-old">S/. 260.00</span>
+                        </div>
+                        <a class="btn"
+                            href="https://wa.me/51999999999?text=Hola,%20quiero el perfume%20VERSACE YELLOW DIAMOND">Comprar</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- CABALLEROS -->
+            <div class="subsection">
+                <h3>👨 Caballeros</h3>
+                <div class="products">
+                    <div class="product">
+                        <img src="assets/perfume.png" alt="Explorer">
+                        <h4>Explorer</h4>
+                        <p>Montblanc</p>
+                        <p class="price">S/. 349.00</p>
+                        <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Explorer">Comprar</a>
+                    </div>
+                    <div class="product">
+                        <img src="assets/perfume.png" alt="Black Oud">
+                        <h4>Black Oud</h4>
+                        <p>YSL</p>
+                        <p class="price">S/. 399.00</p>
+                        <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Black%20Oud">Comprar</a>
+                    </div>
+                    <div class="product">
+                        <img src="assets/perfume.png" alt="Pure XS">
+                        <h4>Pure XS</h4>
+                        <p>Paco Rabanne</p>
+                        <p class="price">S/. 369.00</p>
+                        <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Pure%20XS">Comprar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
-</header>
 
-<!-- NAV STICKY -->
-<nav class="sticky-nav">
-    <a href="#perfumes-disenador" class="nav-title diseñador">Perfumes Diseñador</a>
-    <a href="#perfumes-arabes" class="nav-title arabe">Perfumes Árabes</a>
-</nav>
+    <footer>
+        © 2026 L’Arôme Boutique · Ventas por WhatsApp
+    </footer>
 
-<div class="columns">
-
-    <!-- PERFUMES DISEÑADOR -->
-    <div class="section-box" id="perfumes-disenador">
-        <div class="section-title">Perfumes Diseñador</div>
-
-        <!-- DAMAS -->
-        <div class="subsection">
-            <h3>👩 Damas</h3>
-            <div class="products">
-                <div class="product">
-                    <img src="assets/perfume.png" alt="Elegance">
-                    <h4>Elegance</h4>
-                    <p>Chanel</p>
-                    <p class="price">S/. 499.00</p>
-                    <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Elegance">Comprar</a>
-                </div>
-                <div class="product">
-                    <img src="assets/perfume.png" alt="Dior Bloom">
-                    <h4>Dior Bloom</h4>
-                    <p>Dior</p>
-                    <p class="price">S/. 429.00</p>
-                    <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Dior%20Bloom">Comprar</a>
-                </div>
-                <div class="product">
-                    <img src="assets/perfume.png" alt="Miss Lovely">
-                    <h4>Miss Lovely</h4>
-                    <p>Gucci</p>
-                    <p class="price">S/. 389.00</p>
-                    <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Miss%20Lovely">Comprar</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- CABALLEROS -->
-        <div class="subsection">
-            <h3>👨 Caballeros</h3>
-            <div class="products">
-                <div class="product">
-                    <img src="assets/perfume.png" alt="Explorer">
-                    <h4>Explorer</h4>
-                    <p>Montblanc</p>
-                    <p class="price">S/. 349.00</p>
-                    <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Explorer">Comprar</a>
-                </div>
-                <div class="product">
-                    <img src="assets/perfume.png" alt="Black Oud">
-                    <h4>Black Oud</h4>
-                    <p>YSL</p>
-                    <p class="price">S/. 399.00</p>
-                    <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Black%20Oud">Comprar</a>
-                </div>
-                <div class="product">
-                    <img src="assets/perfume.png" alt="Pure XS">
-                    <h4>Pure XS</h4>
-                    <p>Paco Rabanne</p>
-                    <p class="price">S/. 369.00</p>
-                    <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Pure%20XS">Comprar</a>
-                </div>
-            </div>
-        </div>
+    <!-- MODAL -->
+    <div class="modal" id="imageModal">
+        <span class="close-btn">&times;</span>
+        <img id="modalImg">
     </div>
 
-    <!-- PERFUMES ÁRABES -->
-    <div class="section-box" id="perfumes-arabes">
-        <div class="section-title">Perfumes Árabes</div>
-
-        <!-- DAMAS -->
-        <div class="subsection">
-            <h3>👩 Damas</h3>
-            <div class="products">
-                <div class="product">
-                    <img src="assets/perfume.png" alt="Noor">
-                    <h4>Noor</h4>
-                    <p>Lattafa</p>
-                    <p class="price">S/. 219.00</p>
-                    <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Noor">Comprar</a>
-                </div>
-                <div class="product">
-                    <img src="assets/perfume.png" alt="Amira">
-                    <h4>Amira</h4>
-                    <p>Rasasi</p>
-                    <p class="price">S/. 239.00</p>
-                    <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Amira">Comprar</a>
-                </div>
-                <div class="product">
-                    <img src="assets/perfume.png" alt="Layla">
-                    <h4>Layla</h4>
-                    <p>Ajmal</p>
-                    <p class="price">S/. 259.00</p>
-                    <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Layla">Comprar</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- CABALLEROS -->
-        <div class="subsection">
-            <h3>👨 Caballeros</h3>
-            <div class="products">
-                <div class="product">
-                    <img src="assets/perfume.png" alt="Asad">
-                    <h4>Asad</h4>
-                    <p>Lattafa</p>
-                    <p class="price">S/. 199.00</p>
-                    <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Asad">Comprar</a>
-                </div>
-                <div class="product">
-                    <img src="assets/perfume.png" alt="Oud Royal">
-                    <h4>Oud Royal</h4>
-                    <p>Rasasi</p>
-                    <p class="price">S/. 249.00</p>
-                    <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Oud%20Royal">Comprar</a>
-                </div>
-                <div class="product">
-                    <img src="assets/perfume.png" alt="Desert King">
-                    <h4>Desert King</h4>
-                    <p>Ajmal</p>
-                    <p class="price">S/. 279.00</p>
-                    <a class="btn" href="https://wa.me/51999999999?text=Hola,%20quiero%20Desert%20King">Comprar</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<footer>
-    © 2026 L’Arôme Boutique · Ventas por WhatsApp
-</footer>
-
-<!-- MODAL -->
-<div class="modal" id="imageModal">
-    <span class="close-btn">&times;</span>
-    <img id="modalImg">
-</div>
-
-<script>
-const modal = document.getElementById("imageModal");
-const modalImg = document.getElementById("modalImg");
-const closeBtn = document.querySelector(".close-btn");
-
-document.querySelectorAll(".product img").forEach(img=>{
-    img.onclick=()=>{
-        modalImg.src=img.src;
-        modal.classList.add("active");
-    }
-});
-closeBtn.onclick=()=>modal.classList.remove("active");
-modal.onclick=e=>{ if(e.target===modal) modal.classList.remove("active"); }
-</script>
+    <script src="js/main.js"></script>
 
 </body>
+
 </html>
