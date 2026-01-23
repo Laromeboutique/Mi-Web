@@ -36,6 +36,27 @@
     pointer-events: none !important;    /* bloquea click */
 }
 
+/* PRODUCTO EN OFERTA */
+.product.offer {
+    position: relative; /* necesario para badge */
+}
+
+/* Badge verde "En oferta" */
+.product.offer .offer-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #2ecc71;/* verde */
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 6px;
+    z-index: 10;
+    text-transform: uppercase;
+}
+
+
 .price-container {
     display: flex;
     justify-content: center;
@@ -54,7 +75,7 @@
     font-size: 14px;
     color: #999;
 }
-
+    
 
 
 *{ box-sizing:border-box; }
